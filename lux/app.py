@@ -1,11 +1,29 @@
 from flask import request
+import functools
 
 import lux.services.chat_service as chat
 import lux.services.info_service as info
-from lux import lux, LUX_PORT, LUX_HOST
+from lux import lux, LUX_PORT, LUX_HOST, LUX_AUTH
 from lux.services import VOID_RESPONSE
 from lux.services.clients import GROUPME_BOT
 from lux.transfer.inbound import GroupMeMessage
+
+
+def authenticated(func):
+    '''
+    Poor mans auth since I haven't seen how groupme is going to do it nicely for us. People must provide the API key
+    configured at start up
+    :param func:
+    :return:
+    '''
+    @functools.wraps(func)
+    def wrapper(*args, **kwds):
+        if lux.got_first_request and LUX_AUTH == request.args["TOKEN"]:
+            return func(*args, **kwds)
+        else:
+            return VOID_RESPONSE, 403
+
+    return wrapper
 
 
 @lux.route('/api/v1', methods=['GET'])
@@ -15,6 +33,7 @@ def root():
 
 
 @lux.route('/api/v1/info/about', methods=['GET'])
+@authenticated
 def about():
     '''
     Tell me about the app
@@ -26,6 +45,7 @@ def about():
 
 
 @lux.route('/api/v1/info/health', methods=['GET'])
+@authenticated
 def health_check():
     '''
     Tell me the health status
@@ -37,6 +57,7 @@ def health_check():
 
 
 @lux.route('/api/v1/chat/message/groupme', methods=['POST'])
+@authenticated
 def groupme_message():
     '''
     Handle a new groupme message
