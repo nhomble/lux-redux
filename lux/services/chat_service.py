@@ -1,7 +1,8 @@
 from lux.domain import ChatMessage
-from lux.services import VOID_RESPONSE, GROUPME
+from lux.services import VOID_RESPONSE
 
 from lux.services.bot import respond_to_chat
+from lux.services.clients import GROUPME_BOT
 from lux.transfer.inbound import GroupMeMessage
 
 
@@ -17,5 +18,5 @@ def groupme_message(msg: GroupMeMessage):
     )
     decision = respond_to_chat(message)
     if decision.should_respond:
-        GROUPME.post(decision.reply)
+        GROUPME_BOT.message(decision.reply)
     return VOID_RESPONSE
