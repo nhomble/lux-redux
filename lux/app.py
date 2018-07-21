@@ -6,13 +6,13 @@ from lux import lux, LUX_PORT
 from lux.transfer.inbound import GroupMeMessage
 
 
-@lux.route('/', methods=['GET'])
+@lux.route('/api/v1', methods=['GET'])
 def root():
     lux.logger.info("ping")
     return "ping"
 
 
-@lux.route('/v1/info/about', methods=['GET'])
+@lux.route('/api/v1/info/about', methods=['GET'])
 def about():
     '''
     Tell me about the app
@@ -23,7 +23,7 @@ def about():
     return response, 200
 
 
-@lux.route('/v1/info/health', methods=['GET'])
+@lux.route('/api/v1/info/health', methods=['GET'])
 def health_check():
     '''
     Tell me the health status
@@ -34,7 +34,7 @@ def health_check():
     return response, 200
 
 
-@lux.route('/v1/chat/message/groupme', methods=['POST'])
+@lux.route('/api/v1/chat/message/groupme', methods=['POST'])
 def groupme_message():
     '''
     Handle a new groupme message
