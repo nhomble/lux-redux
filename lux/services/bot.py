@@ -31,7 +31,5 @@ def respond_to_chat(msg: ChatMessage) -> ChatDecision:
     :param msg:
     :return:
     '''
-    if msg.author != GROUPME_BOT_NAME:
-        return ChatDecision.respond_with("mmwt")
-    else:
-        return ChatDecision.ignore()
+
+    return ChatDecision.respond_with("mmwt")

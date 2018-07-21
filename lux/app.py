@@ -3,6 +3,8 @@ from flask import request
 import lux.services.chat_service as chat
 import lux.services.info_service as info
 from lux import lux, LUX_PORT, LUX_HOST
+from lux.services import VOID_RESPONSE
+from lux.services.clients import GROUPME_BOT
 from lux.transfer.inbound import GroupMeMessage
 
 
@@ -40,8 +42,11 @@ def groupme_message():
     Handle a new groupme message
     '''
     message = GroupMeMessage.from_json(request.data)
-    lux.logger.info("Handling groupme message " + str(message))
-    response = chat.groupme_message(message)
+    if message.author == GROUPME_BOT.name:
+        response = VOID_RESPONSE
+    else:
+        response = chat.groupme_message(message)
+
     return response, 200
 
 
