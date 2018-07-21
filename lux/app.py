@@ -52,4 +52,5 @@ if __name__ == "__main__":
     
     **NOTE** this must be called after the routes are registered above
     '''
+    lux.logger.info("Going to bind to PORT=" + LUX_PORT)
     lux.run(port=LUX_PORT)
