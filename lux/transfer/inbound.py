@@ -19,7 +19,7 @@ class GroupMeMessage(DTO):
 
     @classmethod
     def from_dict(cls, d):
-        return cls(d["author"], d["text"])
+        return cls(d["name"], d["text"])
 
     @classmethod
     def from_json(cls, json):
