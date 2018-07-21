@@ -30,4 +30,5 @@ def respond_to_chat(msg: ChatMessage) -> ChatDecision:
     :param msg:
     :return:
     '''
+    print(msg.author)
     return ChatDecision.respond_with("mmwt")
