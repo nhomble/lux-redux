@@ -1,4 +1,5 @@
 from lux.domain import ChatMessage
+from lux.services.clients import GROUPME_BOT_NAME
 
 
 class ChatDecision():
@@ -30,5 +31,7 @@ def respond_to_chat(msg: ChatMessage) -> ChatDecision:
     :param msg:
     :return:
     '''
-    print(msg.author)
-    return ChatDecision.respond_with("mmwt")
+    if msg.author != GROUPME_BOT_NAME:
+        return ChatDecision.respond_with("mmwt")
+    else:
+        return ChatDecision.ignore()

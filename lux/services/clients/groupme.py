@@ -6,8 +6,13 @@ from lux.services import to_json
 class GroupmeBot:
     URL = "https://api.groupme.com/v3/bots/post"
 
-    def __init__(self, bot_id):
+    def __init__(self, bot_id, name):
         self._bot_id = bot_id
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
 
     @property
     def bot_id(self):
