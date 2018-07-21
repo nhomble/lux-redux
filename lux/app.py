@@ -42,6 +42,7 @@ def groupme_message():
     Handle a new groupme message
     '''
     message = GroupMeMessage.from_json(request.data)
+    print(request.headers)
     if message.author == GROUPME_BOT.name:
         response = VOID_RESPONSE
     else:
