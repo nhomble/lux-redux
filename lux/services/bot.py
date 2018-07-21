@@ -32,4 +32,4 @@ def respond_to_chat(msg: ChatMessage) -> ChatDecision:
     :return:
     '''
 
-    return ChatDecision.respond_with("mmwt")
+    return ChatDecision.respond_with(msg.author + ", you know what, mmwt")
