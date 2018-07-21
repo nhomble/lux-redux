@@ -2,7 +2,7 @@ from flask import request
 
 import lux.services.chat_service as chat
 import lux.services.info_service as info
-from lux import lux, LUX_PORT
+from lux import lux, LUX_PORT, LUX_HOST
 from lux.transfer.inbound import GroupMeMessage
 
 
@@ -52,5 +52,6 @@ if __name__ == "__main__":
     
     **NOTE** this must be called after the routes are registered above
     '''
+    print("Going to bind to HOST=" + LUX_HOST)
     print("Going to bind to PORT=" + LUX_PORT)
-    lux.run(port=LUX_PORT)
+    lux.run(host=LUX_HOST, port=LUX_PORT)
