@@ -1,5 +1,6 @@
 from lux.domain import ChatMessage
 from lux.services.clients import GROUPME_BOT_NAME
+import random
 
 
 class ChatDecision():
@@ -32,4 +33,7 @@ def respond_to_chat(msg: ChatMessage) -> ChatDecision:
     :return:
     '''
 
-    return ChatDecision.respond_with(msg.author + ", you know what, mmwt")
+    if random.random() > .5:
+        return ChatDecision.respond_with(msg.author + ", you know what, mmwt")
+    else:
+        return ChatDecision.ignore()
